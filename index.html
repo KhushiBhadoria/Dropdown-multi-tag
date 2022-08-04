@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Input Tag</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet"> -->
+        
+    </head>
+    <body>
+        <div class="main-container" id="main-container">
+            <div class="container"  id="container">
+                <input><img src="drop.png" id="drop-icon">
+            </div>
+            <div class="list-item" id="list-item" >
+                <ul id="list">
+                <li>Machine Learning</li>
+                <li>Data Science</li>
+                <li>Neural Networks</li>
+                <li>LSTM</li>
+                <li>Data Analytics</li>
+            </ul>
+                
+            </div>
+        </div>
+        
+        <script >
+        
+        const tagContainer = document.getElementById('container');
+        const input = document.querySelector('.container input');
+        const dropIcon=document.getElementById('drop-icon');
+        const listItem=document.getElementById('list-item');
+        const list=document.getElementById('list');
+        const items=document.querySelectorAll('#list li');
+    
+
+        let tags = [];
+        function createTag(tag) {
+            
+            const span = document.createElement('span');
+            span.innerHTML = tag;
+            //console.log(span);
+            const closeIcon = document.createElement('img');
+            closeIcon.src ="icon.png";
+            closeIcon.addEventListener('click',function(e){
+                //console.log(tags.length);
+                var removeTag=this.parentNode;
+                console.log(removeTag);
+                deleteTag(removeTag)
+                
+            
+            });
+            span.appendChild(closeIcon);
+            tagContainer.appendChild(span);
+            return span;
+        }
+        function addTags(e) {
+            let tag;
+            console.log(e);
+            
+             //let index=list.index;
+             //console.log(index);
+             tag=items[3].innerHTML;
+            
+                
+            if(!tags.includes(tag)){
+                tag.split(",").forEach(tag =>{tags.push(tag);
+                console.log(tags);
+                createTag(tag);
+            
+            
+            });
+        }
+    }
+
+        
+        function deleteTag(removeTag){
+            //document.querySelector('span').remove();
+            removeTag.remove();
+            
+            
+
+        }
+        function displayList(){
+            if(listItem.style.display==='none'){
+                listItem.style.display='block';
+            }
+            else{
+                listItem.style.display='none';
+            }
+        }
+
+
+        
+        list.addEventListener('click',addTags);
+        dropIcon.addEventListener('click',displayList);
+
+        
+        
+ 
+
+    
+        </script>
+    </body>
+</html>
