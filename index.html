@@ -13,18 +13,19 @@
     </head>
     <body>
         <div class="main-container" id="main-container">
+            <h3>Type any Keyword</h3>
             <div class="container"  id="container">
-                <input><img src="drop.png" id="drop-icon">
+                <input type="text" placeholder="search">
             </div>
             <div class="list-item" id="list-item" >
-                <ul id="list">
-                <li>Machine Learning</li>
-                <li>Data Science</li>
-                <li>Neural Networks</li>
-                <li>LSTM</li>
-                <li>Data Analytics</li>
-            </ul>
-                
+                <select id="list" >
+                    <option>Machine Learning</option>
+                    <option>Data Science</option>
+                    <option>Neural Networks</option>
+                    <option>LSTM</option>
+                    <option>Data Analytics</option>
+                   
+                </select>
             </div>
         </div>
         
@@ -32,12 +33,11 @@
         
         const tagContainer = document.getElementById('container');
         const input = document.querySelector('.container input');
-        const dropIcon=document.getElementById('drop-icon');
+        //const dropIcon=document.getElementById('drop-icon');
         const listItem=document.getElementById('list-item');
         const list=document.getElementById('list');
-        const items=document.querySelectorAll('#list li');
-    
-
+        const items=document.querySelectorAll('#list option');
+        console.log(items);
         let tags = [];
         function createTag(tag) {
             
@@ -51,8 +51,6 @@
                 var removeTag=this.parentNode;
                 console.log(removeTag);
                 deleteTag(removeTag)
-                
-            
             });
             span.appendChild(closeIcon);
             tagContainer.appendChild(span);
@@ -60,21 +58,18 @@
         }
         function addTags(e) {
             let tag;
-            console.log(e);
-            
-             //let index=list.index;
-             //console.log(index);
-             tag=items[3].innerHTML;
-            
-                
+            //console.log(e);
+            //let index=list.index;
+            //console.log(index);
+            //var item=e.item();
+            //console.log(item);
+            tag=list.options[list.selectedIndex].text;
+            console.log(tag);
             if(!tags.includes(tag)){
-                tag.split(",").forEach(tag =>{tags.push(tag);
+                //tag.split(",").forEach(tag =>{tags.push(tag);
                 console.log(tags);
                 createTag(tag);
-            
-            
-            });
-        }
+            }
     }
 
         
@@ -82,11 +77,9 @@
             //document.querySelector('span').remove();
             removeTag.remove();
             
-            
-
         }
         function displayList(){
-            if(listItem.style.display==='none'){
+            if(listItem.style.display===''){
                 listItem.style.display='block';
             }
             else{
@@ -94,10 +87,9 @@
             }
         }
 
-
         
-        list.addEventListener('click',addTags);
-        dropIcon.addEventListener('click',displayList);
+        listItem.addEventListener('click',addTags);
+        input.addEventListener('input',displayList);
 
         
         
